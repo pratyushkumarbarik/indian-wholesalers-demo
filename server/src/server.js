@@ -15,7 +15,10 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "http://localhost:5174",
+    origin: [
+      "http://localhost:5174",
+      "https://indian-wholesalers-demo.onrender.com",
+    ],
     credentials: true,
   })
 );
@@ -38,6 +41,9 @@ app.use("/api/admins", adminRoutes);
  */
 app.use("/api/employees", employeeRoutes);
 
+/*
+ * CUSTOMER → QUERY MANAGEMENT
+ */
 app.use("/api/queries", queryRoutes);
 
 /*
@@ -53,10 +59,7 @@ app.get("/api/health", async (req, res) => {
       database: "connected",
     });
   } catch (error) {
-    console.error(
-      "Database connection error:",
-      error
-    );
+    console.error("Database connection error:", error);
 
     res.status(500).json({
       success: false,
