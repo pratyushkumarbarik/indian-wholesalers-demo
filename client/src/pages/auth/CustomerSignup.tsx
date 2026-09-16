@@ -51,7 +51,7 @@ export default function CustomerSignup() {
       setLoading(true);
 
       const response = await fetch(
-        "http://https://indian-wholesalers-api.onrender.com/api/auth/signup",
+        "https://indian-wholesalers-api.onrender.com/api/auth/signup",
         {
           method: "POST",
           headers: {

@@ -39,7 +39,7 @@ export default function CustomerLogin() {
       setLoading(true);
 
       const response = await fetch(
-        "http://https://indian-wholesalers-api.onrender.com/api/auth/login",
+        "https://indian-wholesalers-api.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: {
