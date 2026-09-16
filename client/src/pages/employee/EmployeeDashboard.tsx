@@ -206,7 +206,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        "http://localhost:5000/api/employees/me",
+        "http://https://indian-wholesalers-api.onrender.com/api/employees/me",
         { method: "GET", headers }
       );
 
@@ -251,7 +251,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        "http://localhost:5000/api/queries/assigned",
+        "http://https://indian-wholesalers-api.onrender.com/api/queries/assigned",
         { method: "GET", headers }
       );
 
@@ -301,7 +301,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${queryId}/accept`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${queryId}/accept`,
         { method: "POST", headers }
       );
 
@@ -348,7 +348,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${queryId}/complete`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${queryId}/complete`,
         { method: "POST", headers }
       );
 
@@ -392,7 +392,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        "http://localhost:5000/api/queries/history",
+        "http://https://indian-wholesalers-api.onrender.com/api/queries/history",
         { method: "GET", headers }
       );
 
@@ -430,7 +430,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${queryId}/messages/employee`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${queryId}/messages/employee`,
         {
           method: "GET",
           headers,
@@ -477,7 +477,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${queryId}/meetings/employee`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${queryId}/meetings/employee`,
         {
           method: "GET",
           headers,
@@ -529,7 +529,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${selectedChatQueryId}/messages/employee`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${selectedChatQueryId}/messages/employee`,
         {
           method: "POST",
           headers,
@@ -612,7 +612,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${selectedChatQueryId}/meeting`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${selectedChatQueryId}/meeting`,
         {
           method: "POST",
           headers,
@@ -739,7 +739,7 @@ function EmployeeDashboard() {
       if (!headers) return;
 
       const response = await fetch(
-        `http://localhost:5000/api/employees/${
+        `http://https://indian-wholesalers-api.onrender.com/api/employees/${
           action === "available"
             ? "availability"
             : "offline"

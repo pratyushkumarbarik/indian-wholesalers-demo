@@ -66,7 +66,7 @@ export default function RegulatorDashboard() {
       setError("");
 
       const response = await fetch(
-        "http://localhost:5000/api/admins",
+        "http://https://indian-wholesalers-api.onrender.com/api/admins",
         {
           method: "GET",
           credentials: "include",
@@ -117,7 +117,7 @@ export default function RegulatorDashboard() {
       setError("");
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/logout",
+        "http://https://indian-wholesalers-api.onrender.com/api/auth/logout",
         {
           method: "POST",
           headers: {
@@ -168,7 +168,7 @@ export default function RegulatorDashboard() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admins",
+        "http://https://indian-wholesalers-api.onrender.com/api/admins",
         {
           method: "POST",
           headers: {
@@ -234,7 +234,7 @@ export default function RegulatorDashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admins/${admin.id}/${action}`,
+        `http://https://indian-wholesalers-api.onrender.com/api/admins/${admin.id}/${action}`,
         {
           method: "PATCH",
           credentials: "include",

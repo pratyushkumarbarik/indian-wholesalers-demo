@@ -68,7 +68,7 @@ export default function AdminDashboard() {
       setError("");
 
       const response = await fetch(
-        "http://localhost:5000/api/employees",
+        "http://https://indian-wholesalers-api.onrender.com/api/employees",
         {
           method: "GET",
           credentials: "include",
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
       setError("");
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/logout",
+        "http://https://indian-wholesalers-api.onrender.com/api/auth/logout",
         {
           method: "POST",
           headers: {
@@ -167,7 +167,7 @@ export default function AdminDashboard() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/employees",
+        "http://https://indian-wholesalers-api.onrender.com/api/employees",
         {
           method: "POST",
           headers: {
@@ -243,7 +243,7 @@ export default function AdminDashboard() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/employees/${employee.id}/${action}`,
+        `http://https://indian-wholesalers-api.onrender.com/api/employees/${employee.id}/${action}`,
         {
           method: "PATCH",
           credentials: "include",

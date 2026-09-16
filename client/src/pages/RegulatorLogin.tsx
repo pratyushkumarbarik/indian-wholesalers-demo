@@ -42,7 +42,7 @@ export default function RegulatorLogin() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch("http://https://indian-wholesalers-api.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -63,7 +63,7 @@ export default function RegulatorLogin() {
 
       // Verify that the regulator session was created correctly.
       const sessionResponse = await fetch(
-        "http://localhost:5000/api/auth/regulator/me",
+        "http://https://indian-wholesalers-api.onrender.com/api/auth/regulator/me",
         {
           method: "GET",
           credentials: "include",

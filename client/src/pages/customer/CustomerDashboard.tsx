@@ -183,7 +183,7 @@ function CustomerDashboard() {
       return [];
     }
     const response = await fetch(
-      "http://localhost:5000/api/queries/my",
+      "http://https://indian-wholesalers-api.onrender.com/api/queries/my",
       {
         method: "GET",
         headers,
@@ -224,7 +224,7 @@ function CustomerDashboard() {
       }
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${queryId}/tracking`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${queryId}/tracking`,
         {
           method: "GET",
           headers,
@@ -285,7 +285,7 @@ function CustomerDashboard() {
       }
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${queryId}/messages`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${queryId}/messages`,
         {
           method: "GET",
           headers,
@@ -351,7 +351,7 @@ function CustomerDashboard() {
       }
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${selectedChatQueryId}/messages`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${selectedChatQueryId}/messages`,
         {
           method: "POST",
           headers,
@@ -432,7 +432,7 @@ function CustomerDashboard() {
       }
 
       const response = await fetch(
-        `http://localhost:5000/api/queries/${queryId}/meetings`,
+        `http://https://indian-wholesalers-api.onrender.com/api/queries/${queryId}/meetings`,
         {
           method: "GET",
           headers,
@@ -1044,7 +1044,7 @@ function CustomerDashboard() {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/logout",
+        "http://https://indian-wholesalers-api.onrender.com/api/auth/logout",
         {
           method: "POST",
           headers,
@@ -1195,7 +1195,7 @@ async function handleSubmit(
     }
 
     const response = await fetch(
-      "http://localhost:5000/api/queries",
+      "http://https://indian-wholesalers-api.onrender.com/api/queries",
       {
         method: "POST",
         headers,
