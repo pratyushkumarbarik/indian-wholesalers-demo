@@ -183,7 +183,7 @@ function CustomerDashboard() {
       return [];
     }
     const response = await fetch(
-      "https://indian-wholesalers-api.onrender.comy",
+      "https://indian-wholesalers-api.onrender.com/api/queries/my",
       {
         method: "GET",
         headers,
@@ -224,7 +224,7 @@ function CustomerDashboard() {
       }
 
       const response = await fetch(
-        `https://indian-wholesalers-api.onrender.comeries/${queryId}/tracking`,
+        `https://indian-wholesalers-api.onrender.com/api/queries/${queryId}/tracking`,
         {
           method: "GET",
           headers,
