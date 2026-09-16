@@ -1,0 +1,232 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  REGULATOR
+  ADMIN
+  EMPLOYEE
+  CUSTOMER
+}
+
+enum AccountStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum EmployeeAvailability {
+  AVAILABLE
+  BUSY
+  OFFLINE
+}
+
+enum QueryStatus {
+  WAITING
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  NEEDS_INFO
+  CANCELLED
+}
+
+model User {
+  id           String        @id @default(cuid())
+  employeeId   String?       @unique
+  name         String
+  email        String        @unique
+  passwordHash String
+  role         Role
+  status       AccountStatus @default(ACTIVE)
+
+  createdById  String?
+  createdBy    User?         @relation("UserCreatedUsers", fields: [createdById], references: [id])
+  createdUsers User[]        @relation("UserCreatedUsers")
+
+  // Customer queries
+  customerQueries Query[] @relation("CustomerQueries")
+
+  // Employee assigned queries
+  assignedQueries Query[] @relation("EmployeeQueries")
+
+  // Employee information
+  employeeProfile EmployeeProfile?
+
+  // Chat messages sent by this user
+  sentMessages QueryMessage[] @relation("UserSentMessages")
+
+  // Meetings created by this user
+  createdMeetings Meeting[] @relation("UserCreatedMeetings")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([role])
+  @@index([status])
+  @@index([createdById])
+}
+
+model EmployeeProfile {
+  id String @id @default(cuid())
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  availability EmployeeAvailability @default(OFFLINE)
+
+  // Number of queries currently assigned/in progress
+  currentQueryCount Int @default(0)
+
+  // Used for sequential assignment
+  lastAssignedAt DateTime?
+
+  // Number of completed queries
+  completedQueryCount Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([availability])
+  @@index([lastAssignedAt])
+}
+
+model EmployeeCounter {
+  id        Int      @id @default(1)
+  nextValue Int      @default(1)
+  updatedAt DateTime @updatedAt
+}
+
+model Query {
+  id String @id @default(cuid())
+
+  // Customer who submitted the query
+  customerId String
+  customer   User   @relation("CustomerQueries", fields: [customerId], references: [id])
+
+  // Employee assigned by the assignment engine
+  employeeId String?
+  employee   User?  @relation("EmployeeQueries", fields: [employeeId], references: [id])
+
+  department String
+  feature    String
+
+  description String
+
+  status QueryStatus @default(WAITING)
+
+  // Assignment information
+  assignedAt DateTime?
+  acceptedAt DateTime?
+  completedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Documents attached to the query
+  documents QueryDocument[]
+
+  // Chat messages belonging to this query
+  messages QueryMessage[]
+
+  // Meetings belonging to this query
+  meetings Meeting[]
+
+  @@index([customerId])
+  @@index([employeeId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model QueryDocument {
+  id String @id @default(cuid())
+
+  queryId String
+  query   Query  @relation(fields: [queryId], references: [id], onDelete: Cascade)
+
+  // Original file name shown to the employee/customer
+  originalName String
+
+  // Name used when storing the file
+  storedName String
+
+  mimeType String
+
+  size Int
+
+  // Storage location
+  path String
+
+  createdAt DateTime @default(now())
+
+  @@index([queryId])
+}
+
+model QueryMessage {
+  id String @id @default(cuid())
+
+  // Query this message belongs to
+  queryId String
+  query   Query  @relation(fields: [queryId], references: [id], onDelete: Cascade)
+
+  // User who sent the message
+  senderId String
+  sender   User   @relation("UserSentMessages", fields: [senderId], references: [id])
+
+  // Message content
+  message String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([queryId])
+  @@index([senderId])
+  @@index([createdAt])
+}
+
+model Meeting {
+  id String @id @default(cuid())
+
+  // Query for which the meeting was created
+  queryId String
+  query   Query  @relation(fields: [queryId], references: [id], onDelete: Cascade)
+
+  // Employee/user who created the meeting
+  createdById String
+  createdBy   User   @relation("UserCreatedMeetings", fields: [createdById], references: [id])
+
+  // Meeting URL
+  meetingLink String
+
+  // Optional scheduled meeting time
+  scheduledAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([queryId])
+  @@index([createdById])
+}
+
+model AssignmentCounter {
+  id Int @id @default(1)
+
+  // ID/position of the employee whose turn is next
+  nextEmployeePosition Int @default(1)
+
+  updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  action    String
+  targetId  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([actorId])
+  @@index([createdAt])
+}
